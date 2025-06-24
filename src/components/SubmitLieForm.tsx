@@ -12,7 +12,7 @@ const SubmitLieForm = () => {
     reason: "",
     hope: ""
   });
-  const [consequence, setConsequence] = useState("");
+  const [consequence, setConsequence] = useState<{ magical: string; honest: string } | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const generateConsequence = () => {
@@ -45,7 +45,7 @@ const SubmitLieForm = () => {
 
   const resetForm = () => {
     setFormData({ lie: "", reason: "", hope: "" });
-    setConsequence("");
+    setConsequence(null);
     setIsSubmitted(false);
   };
 
@@ -127,21 +127,23 @@ const SubmitLieForm = () => {
                 </h3>
               </div>
               
-              <div className="space-y-6">
-                <div className="bg-white/20 p-6 rounded-lg">
-                  <h4 className="font-clean font-bold text-xl mb-3">🌟 If Magic Were Real:</h4>
-                  <p className="font-clean leading-relaxed">
-                    {consequence.magical}
-                  </p>
+              {consequence && (
+                <div className="space-y-6">
+                  <div className="bg-white/20 p-6 rounded-lg">
+                    <h4 className="font-clean font-bold text-xl mb-3">🌟 If Magic Were Real:</h4>
+                    <p className="font-clean leading-relaxed">
+                      {consequence.magical}
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white/20 p-6 rounded-lg">
+                    <h4 className="font-clean font-bold text-xl mb-3">💫 The Honest Path:</h4>
+                    <p className="font-clean leading-relaxed">
+                      {consequence.honest}
+                    </p>
+                  </div>
                 </div>
-                
-                <div className="bg-white/20 p-6 rounded-lg">
-                  <h4 className="font-clean font-bold text-xl mb-3">💫 The Honest Path:</h4>
-                  <p className="font-clean leading-relaxed">
-                    {consequence.honest}
-                  </p>
-                </div>
-              </div>
+              )}
               
               <div className="text-center mt-8">
                 <Button 
